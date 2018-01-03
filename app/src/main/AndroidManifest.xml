@@ -35,8 +35,12 @@
         <activity
             android:name=".CashTransferActivity"
             android:label="Cash Transfer" />
-        <activity android:name=".SavingAmountActivity"
-            android:label="Add Saving Amount"/>
+        <activity
+            android:name=".SavingAmountActivity"
+            android:label="Add Saving Amount" />
+        <activity
+            android:name=".NewObjectiveActivity"
+            android:label="Add New Objective"/>
     </application>
 
 </manifest>
