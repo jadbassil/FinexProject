@@ -87,11 +87,16 @@
     <string name="pref_ringtone_silent">Silent</string>
 
     <string name="pref_title_vibrate">Vibrate</string>
-    
+
     <string-array name="transferFromTO">
         <item></item>
         <item>Personal account</item>
         <item>Transfer account</item>
     </string-array>
-    
+
+    <string name="warning">
+        This amount is like a cash deposit and will be added to your savings account.
+        If you want to transfer this amount from another account use Cash Transfer.
+    </string>
+
 </resources>

@@ -29,6 +29,11 @@ public class SavingsActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void goToSavingAmountActivity(View v){
+        Intent intent = new Intent(SavingsActivity.this, SavingAmountActivity.class);
+        startActivity(intent);
+    }
+
     public void test(View v){
         ScrollView sV = findViewById(R.id.objectives_views);
         TextView t = new TextView(this);
