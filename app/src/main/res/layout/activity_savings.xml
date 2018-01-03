@@ -134,7 +134,7 @@
         android:layout_marginHorizontal="20dp"
         android:background="#efefef"
         android:text="Add new Objective"
-        android:onClick="test"/>
+        android:onClick="goToNewObjectiveActivity"/>
 
     <ScrollView
         android:layout_width="match_parent"
