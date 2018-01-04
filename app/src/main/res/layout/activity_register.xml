@@ -32,6 +32,7 @@
         android:layout_height="wrap_content"
         android:text="Register"
         android:background="@color/colorPrimary"
-        android:layout_marginVertical="20dp"/>
+        android:layout_marginVertical="20dp"
+        android:onClick="register"/>
 
 </LinearLayout>

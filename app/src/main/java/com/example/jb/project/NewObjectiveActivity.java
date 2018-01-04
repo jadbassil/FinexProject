@@ -10,7 +10,7 @@ import android.widget.TextView;
 public class NewObjectiveActivity extends AppCompatActivity {
 
     SeekBar sb;
-    TextView nbMonths, amountPerMonth, longTermObjective;
+    TextView nbMonths, amountPerMonth;
     EditText finalAmount, savedAmount;
 
     @Override
@@ -22,7 +22,6 @@ public class NewObjectiveActivity extends AppCompatActivity {
         amountPerMonth = findViewById(R.id.amount_per_month);
         finalAmount = findViewById(R.id.final_amount);
         savedAmount = findViewById(R.id.saved_amount);
-        longTermObjective = findViewById(R.id.long_term_objective);
 
         sb.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -41,7 +40,6 @@ public class NewObjectiveActivity extends AppCompatActivity {
                     else
                         nbMonths.setText(String.valueOf(nbYear) + " years " + String.valueOf(nbOfMonth - nbYear*12) + " months");
                 }
-
                 if(finalAmount.getText().toString().length() != 0 && savedAmount.getText().toString().length() != 0) {
                     float fa = Float.valueOf(finalAmount.getText().toString());
                     float sa = Float.valueOf(savedAmount.getText().toString());
@@ -49,8 +47,6 @@ public class NewObjectiveActivity extends AppCompatActivity {
                     amountPerMonth.setText(String.valueOf(aPerMonth) + " Per Month");
                 } else
                     amountPerMonth.setText("(_) Per Month");
-
-
             }
 
             @Override

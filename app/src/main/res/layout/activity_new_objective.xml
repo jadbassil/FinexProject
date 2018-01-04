@@ -105,6 +105,15 @@
 
     </TableRow>
     <LinearLayout>
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginEnd="5dp"
+            android:layout_gravity="center"
+            android:src="@drawable/minus_icon"
+            android:onClick="minusClicked"/>
+
         <SeekBar
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -114,14 +123,6 @@
             android:min="1"
             android:progress="1"
             android:id="@+id/months_seekbar"/>
-
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginEnd="5dp"
-            android:layout_gravity="center"
-            android:src="@drawable/minus_icon"
-            android:onClick="minusClicked"/>
 
         <ImageView
             android:layout_width="30dp"
