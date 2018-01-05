@@ -19,11 +19,13 @@
         android:layout_height="wrap_content"
         android:layout_marginVertical="20dp"
         android:hint="E-mail"
+        android:inputType="textEmailAddress"
         android:id="@+id/reg_email"/>
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:inputType="textPassword"
         android:hint="Password"
         android:id="@+id/reg_password"/>
 

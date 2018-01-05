@@ -1,6 +1,9 @@
 package com.example.jb.project;
 
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -19,6 +22,8 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -49,8 +54,11 @@ public class RegisterActivity extends AppCompatActivity {
         String name = regName.getText().toString();
         String email = regEmail.getText().toString();
         String password = regPassword.getText().toString();
-        SendDataToServer(name, email, password);
-
+        if(name.equals("") || password.equals("") || email.equals("")){
+            Toast.makeText(this, "Invalid input", Toast.LENGTH_SHORT).show();
+        } else {
+            SendDataToServer(name, email, password);
+        }
     }
 
     public void SendDataToServer(final String name, final String email, final String password){
@@ -71,7 +79,7 @@ public class RegisterActivity extends AppCompatActivity {
                 try {
                     HttpClient httpClient = new DefaultHttpClient();
 
-                    HttpPost httpPost = new HttpPost("http://192.168.0.103/Finex/register.php");
+                        HttpPost httpPost = new HttpPost("http://192.168.0.103/Finex/register.php");
 
                     httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 
@@ -87,15 +95,9 @@ public class RegisterActivity extends AppCompatActivity {
                     }
                     return stringBuilder.toString();
 
-
-
-
-
-
                 } catch (Exception e){
                     //Log.v(TAG,e.toString());
                 }
-
 
                 return null;
             }
@@ -103,9 +105,23 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             protected void onPostExecute(String result) {
                 super.onPostExecute(result);
+                System.out.println(result);
+                try {
+                    JSONObject obj = new JSONObject(result);
+                    if(obj.getBoolean("success")){
+                        Intent intent = new Intent(getApplicationContext(), SpendingActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(intent);
+                    }else {
+                        Toast.makeText(getApplicationContext(), "Email already used", Toast.LENGTH_LONG).show();
+                        regName.setText("");
+                        regEmail.setText("");
+                        regPassword.setText("");
+                    }
 
+                } catch (JSONException e) {
 
-                    Toast.makeText(getApplicationContext(), result, Toast.LENGTH_LONG).show();
+                }
 
 
             }
