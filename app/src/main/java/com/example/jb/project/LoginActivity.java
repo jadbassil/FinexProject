@@ -51,7 +51,7 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-       // int id = ((MyApplication) getApplicationContext()).user_id;
+
 
     }
 
@@ -88,7 +88,7 @@ public class LoginActivity extends AppCompatActivity {
                     }
                     return stringBuilder.toString();
                 } catch(Exception e){
-
+                    System.out.println(e);
                 }
                 return null;
             }
@@ -99,6 +99,13 @@ public class LoginActivity extends AppCompatActivity {
                 try {
                     JSONObject obj = new JSONObject(s);
                     if(obj.getBoolean("success")){
+                        //saving user's info locally so we can access them in other activities
+                        SharedPreferences sharedPref = getSharedPreferences("userInfo", MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedPref.edit();
+                        editor.putInt("user_id", obj.getInt("id_user"));
+                        editor.putString("user_name", obj.getString("name"));
+                        editor.apply();
+
                         Intent intent = new Intent(getApplicationContext(), SpendingActivity.class);
                         startActivity(intent);
                     }
@@ -108,7 +115,7 @@ public class LoginActivity extends AppCompatActivity {
                         passwordE.setText("");
                     }
                 }catch (Exception e){
-
+                    System.out.println(e);
                 }
             }
         }

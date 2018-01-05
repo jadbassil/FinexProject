@@ -67,6 +67,7 @@
             android:layout_centerInParent="true"
             android:layout_marginEnd="10dp"
             android:src="@drawable/settings_icon"
+            android:onClick="goToSettingsActivity"
             android:id="@+id/settings_icon"/>
     </RelativeLayout>
 

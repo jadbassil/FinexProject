@@ -48,6 +48,7 @@ public class RegisterActivity extends AppCompatActivity {
         regName = findViewById(R.id.name);
         regEmail = findViewById(R.id.reg_email);
         regPassword = findViewById(R.id.reg_password);
+
     }
 
     public void register(View v) {
