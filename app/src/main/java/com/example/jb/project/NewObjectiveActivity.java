@@ -35,6 +35,8 @@ public class NewObjectiveActivity extends AppCompatActivity {
                     int nbYear = nbOfMonth/12;
                     if (nbYear == 1 && nbOfMonth-nbYear*12 == 1)
                         nbMonths.setText(String.valueOf(nbYear) + " year " + String.valueOf(nbOfMonth - nbYear*12) + " month");
+                    else if (nbYear == 1)
+                        nbMonths.setText(String.valueOf(nbYear) + " year " + String.valueOf(nbOfMonth - nbYear*12) + " months");
                     else if(nbOfMonth-nbYear*12 == 1)
                         nbMonths.setText(String.valueOf(nbYear) + " years " + String.valueOf(nbOfMonth - nbYear*12) + " month");
                     else
@@ -43,7 +45,7 @@ public class NewObjectiveActivity extends AppCompatActivity {
                 if(finalAmount.getText().toString().length() != 0 && savedAmount.getText().toString().length() != 0) {
                     float fa = Float.valueOf(finalAmount.getText().toString());
                     float sa = Float.valueOf(savedAmount.getText().toString());
-                    float aPerMonth = (fa - sa) / Float.valueOf(nbOfMonth);
+                    float aPerMonth = (fa - sa) / nbOfMonth;
                     amountPerMonth.setText(String.valueOf(aPerMonth) + " Per Month");
                 } else
                     amountPerMonth.setText("(_) Per Month");
