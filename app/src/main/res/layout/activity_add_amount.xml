@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.jb.project.AddingAmount"
+    android:orientation="vertical">
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="230dp"
+        android:layout_marginTop="30dp"
+        android:stretchColumns="1">
+
+        <TableRow android:background="#ffffff">
+
+            <TextView
+                android:layout_width="117dp"
+                android:layout_height="wrap_content"
+                android:text="Amount"
+                android:textColor="#000000"
+                android:textSize="17dp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:inputType="number"
+                android:id="@+id/amount_val"
+                android:layout_width="match_parent"
+                android:hint="0.00" />
+        </TableRow>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="#d3d3d3" />
+
+        <TableRow
+            android:background="#ffffff">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Type"
+                android:textColor="#000000"
+                android:textSize="17dp"
+                android:textStyle="bold" />
+
+            <RadioGroup android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/salary_radio"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Salary" />
+
+                <RadioButton
+                    android:id="@+id/income_radio"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Additional Income" />
+            </RadioGroup>
+
+        </TableRow>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="#d3d3d3" />
+
+        <TableRow android:background="#ffffff">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Date"
+                android:textColor="#000000"
+                android:textSize="17dp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:inputType="date"
+                android:id="@+id/date"
+                android:layout_width="match_parent" />
+        </TableRow>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="#d3d3d3" />
+
+        <TableRow
+            android:background="#ffffff">
+
+            <EditText
+                android:layout_span="2"
+                android:hint="P.S : Note..."
+                android:textStyle="italic" />
+        </TableRow>
+    </TableLayout>
+
+
+</LinearLayout>
