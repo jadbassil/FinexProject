@@ -75,7 +75,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 try{
                     HttpClient client = new DefaultHttpClient();
-                    HttpPost post = new HttpPost("http://192.168.0.103/Finex/signIn.php");
+                    HttpPost post = new HttpPost("http://192.168.0.102/Finex/signIn.php");
                     post.setEntity(new UrlEncodedFormEntity(list));
                     HttpResponse response = client.execute(post);
                     InputStream inputStream = response.getEntity().getContent();
@@ -98,6 +98,7 @@ public class LoginActivity extends AppCompatActivity {
                 super.onPostExecute(s);
                 try {
                     JSONObject obj = new JSONObject(s);
+                    System.out.println(obj.toString());
                     if(obj.getBoolean("success")){
                         //saving user's info locally so we can access them in other activities
                         SharedPreferences sharedPref = getSharedPreferences("userInfo", MODE_PRIVATE);

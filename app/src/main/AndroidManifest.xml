@@ -30,9 +30,6 @@
             android:label="Register"
             android:noHistory="true" />
         <activity
-            android:name=".SpendingActivity"
-            android:label="Spendings" />
-        <activity
             android:name=".SavingsActivity"
             android:label="Savings" />
         <activity
@@ -47,6 +44,9 @@
         <activity
             android:name=".SettingsActivity"
             android:label="Settings"/>
+        <activity
+            android:name=".SpendingActivity"
+            android:label="Spendings"/>
     </application>
 
 </manifest>

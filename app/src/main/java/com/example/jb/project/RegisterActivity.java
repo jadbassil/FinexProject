@@ -80,7 +80,7 @@ public class RegisterActivity extends AppCompatActivity {
                 try {
                     HttpClient httpClient = new DefaultHttpClient();
 
-                        HttpPost httpPost = new HttpPost("http://192.168.0.103/Finex/register.php");
+                        HttpPost httpPost = new HttpPost("http://192.168.0.102/Finex/register.php");
 
                     httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.jb.project.SpendingActivity2">
+    tools:context="com.example.jb.project.SpendingActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -23,8 +23,9 @@
                 android:id="@+id/balance_txtview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignBaseline="@id/balance_btn"
-                android:layout_centerVertical="true"
+                android:layout_alignBaseline="@+id/balance_btn"
+                android:layout_alignBottom="@+id/balance_btn"
+                android:layout_alignParentStart="true"
                 android:text="Balance" />
 
             <Button
