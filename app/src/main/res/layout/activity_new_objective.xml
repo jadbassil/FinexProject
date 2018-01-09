@@ -52,28 +52,6 @@
         android:background="#efefef"
         android:layout_marginVertical="10dp"/>
 
-    <TableRow
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Saved Amount"/>
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="number"
-            android:id="@+id/saved_amount"/>
-
-    </TableRow>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#efefef"
-        android:layout_marginVertical="10dp"/>
 
     <TableRow
         android:layout_width="match_parent"
@@ -95,11 +73,6 @@
                 android:text="(_) Months"
                 android:id="@+id/nb_months"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="(_) Per Month"
-                android:id="@+id/amount_per_month"/>
 
         </LinearLayout>
 
@@ -120,7 +93,7 @@
             android:layout_marginVertical="10dp"
             android:layout_weight="1"
             android:max="60"
-            android:min="1"
+            android:min="0"
             android:progress="1"
             android:id="@+id/months_seekbar"/>
 
@@ -138,6 +111,7 @@
         android:layout_height="wrap_content"
         android:layout_marginVertical="20dp"
         android:text="ADD"
+        android:onClick="addObjective"
         android:background="@color/colorPrimary"/>
 
 </TableLayout>

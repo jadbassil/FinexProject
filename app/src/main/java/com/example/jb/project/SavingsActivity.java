@@ -40,6 +40,13 @@ public class SavingsActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        setResult(RESULT_CANCELED);
+        finish();
+    }
+
     public void showDesc(View v){
         new AlertDialog.Builder(this)
                 .setTitle("What is Total savings ?")
@@ -64,8 +71,10 @@ public class SavingsActivity extends AppCompatActivity {
     }
 
     public void setTotalSavings(View v){
-        if(totalSaving.getText().toString().equals(""))
+        if(totalSaving.getText().toString().equals("")) {
             Toast.makeText(this, "Field is not set", Toast.LENGTH_SHORT).show();
+            return;
+        }
         final int total = Integer.valueOf(totalSaving.getText().toString());
         new AlertDialog.Builder(this)
                 .setTitle("Attention")
@@ -103,7 +112,6 @@ public class SavingsActivity extends AppCompatActivity {
 
                 return null;
             }
-
             @Override
             public void onPostExecute(String result){
                 super.onPostExecute(result);

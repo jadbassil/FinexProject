@@ -74,9 +74,13 @@ public class LoginActivity extends AppCompatActivity {
                 list.add(new BasicNameValuePair("password", password));
                 JSONParser j = new JSONParser();
                 JSONObject obj;
-                obj=j.makeHttpRequest("http://10.0.2.2/Finex/signIn.php", "POST", list);
-
-                return obj.toString();
+                try {
+                    obj = j.makeHttpRequest("http://10.0.2.2/Finex/signIn.php", "POST", list);
+                    return obj.toString();
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+                return null;
             }
 
             @Override
@@ -91,6 +95,8 @@ public class LoginActivity extends AppCompatActivity {
                         SharedPreferences.Editor editor = sharedPref.edit();
                         editor.putInt("user_id", obj.getInt("id_user"));
                         editor.putString("user_name", obj.getString("name"));
+                        editor.putString("savings", obj.getString("savings"));
+                        editor.putString("balance", obj.getString("balance"));
                         editor.apply();
 
                         Intent intent = new Intent(getApplicationContext(), SpendingActivity.class);

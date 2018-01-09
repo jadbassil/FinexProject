@@ -90,8 +90,8 @@
 
     <string-array name="transferFromTO">
         <item></item>
-        <item>Personal account</item>
-        <item>Transfer account</item>
+        <item>balance account</item>
+        <item>savings account</item>
     </string-array>
 
     <string name="warning">

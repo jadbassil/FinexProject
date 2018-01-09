@@ -35,12 +35,15 @@
             android:label="Savings" />
         <activity
             android:name=".CashTransferActivity"
+            android:parentActivityName=".SavingsActivity"
             android:label="Cash Transfer" />
         <activity
             android:name=".SavingAmountActivity"
+            android:parentActivityName=".SavingsActivity"
             android:label="Add Saving Amount" />
         <activity
             android:name=".NewObjectiveActivity"
+            android:parentActivityName=".SavingsActivity"
             android:label="Add New Objective" />
         <activity
             android:name=".SettingsActivity"
