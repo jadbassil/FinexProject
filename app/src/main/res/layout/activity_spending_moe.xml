@@ -17,6 +17,7 @@
             android:layout_height="wrap_content"
             android:layout_marginVertical="10dp"
             android:layout_weight="0.5"
+            android:layout_marginHorizontal="5dp"
             android:onClick="openBalanceAct">
 
             <TextView
@@ -26,6 +27,7 @@
                 android:layout_alignBaseline="@+id/balance_btn"
                 android:layout_alignBottom="@+id/balance_btn"
                 android:layout_alignParentStart="true"
+                android:layout_marginEnd="0dp"
                 android:text="Balance" />
 
             <Button

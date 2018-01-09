@@ -72,25 +72,11 @@ public class LoginActivity extends AppCompatActivity {
                 List<NameValuePair> list = new ArrayList<>();
                 list.add(new BasicNameValuePair("email", email));
                 list.add(new BasicNameValuePair("password", password));
+                JSONParser j = new JSONParser();
+                JSONObject obj;
+                obj=j.makeHttpRequest("http://10.0.2.2/Finex/signIn.php", "POST", list);
 
-                try{
-                    HttpClient client = new DefaultHttpClient();
-                    HttpPost post = new HttpPost("http://192.168.0.102/Finex/signIn.php");
-                    post.setEntity(new UrlEncodedFormEntity(list));
-                    HttpResponse response = client.execute(post);
-                    InputStream inputStream = response.getEntity().getContent();
-                    InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
-                    BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-                    StringBuilder stringBuilder = new StringBuilder();
-                    String bufferedStrChunk;
-                    while((bufferedStrChunk = bufferedReader.readLine()) != null){
-                        stringBuilder.append(bufferedStrChunk);
-                    }
-                    return stringBuilder.toString();
-                } catch(Exception e){
-                    System.out.println(e);
-                }
-                return null;
+                return obj.toString();
             }
 
             @Override
@@ -117,7 +103,7 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 }catch (Exception e){
                     System.out.println(e);
-                }
+            }
             }
         }
         sendPostReq spr = new sendPostReq();

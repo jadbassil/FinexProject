@@ -31,6 +31,7 @@
             android:noHistory="true" />
         <activity
             android:name=".SavingsActivity"
+            android:parentActivityName=".SpendingActivity"
             android:label="Savings" />
         <activity
             android:name=".CashTransferActivity"
