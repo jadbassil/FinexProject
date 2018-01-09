@@ -1,5 +1,6 @@
 package com.example.jb.project;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -65,8 +66,18 @@ public class SavingsActivity extends AppCompatActivity {
     public void setTotalSavings(View v){
         if(totalSaving.getText().toString().equals(""))
             Toast.makeText(this, "Field is not set", Toast.LENGTH_SHORT).show();
-        int total = Integer.valueOf(totalSaving.getText().toString());
-        sendDataToServer(total);
+        final int total = Integer.valueOf(totalSaving.getText().toString());
+        new AlertDialog.Builder(this)
+                .setTitle("Attention")
+                .setMessage("Are you sure you want to change your total savings value")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        sendDataToServer(total);
+                    }
+                })
+                .setNegativeButton("No", null)
+                .show();
     }
 
     public void sendDataToServer(final int total){
@@ -81,25 +92,13 @@ public class SavingsActivity extends AppCompatActivity {
                 list.add(new BasicNameValuePair("total", String.valueOf(total)));
 
                 try{
-                    HttpClient httpClient = new DefaultHttpClient();
-
-                    HttpPost httpPost = new HttpPost("http://10.0.2.2/Finex/totalSavings.php");
-
-                    httpPost.setEntity(new UrlEncodedFormEntity(list));
-
-                    HttpResponse response = httpClient.execute(httpPost);
-                    InputStream inputStream = response.getEntity().getContent();
-                    InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
-                    BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-                    StringBuilder stringBuilder = new StringBuilder();
-                    String bufferedStrChunk = null;
-                    while((bufferedStrChunk = bufferedReader.readLine()) != null){
-                        stringBuilder.append(bufferedStrChunk);
-                    }
-                    return stringBuilder.toString();
+                   JSONParser j = new JSONParser();
+                   JSONObject obj ;
+                   obj = j.makeHttpRequest("http://10.0.2.2/Finex/totalSavings.php", "POST", list);
+                   return obj.toString();
 
                 }catch (Exception e){
-
+                    e.printStackTrace();
                 }
 
                 return null;
@@ -112,10 +111,8 @@ public class SavingsActivity extends AppCompatActivity {
                     JSONObject obj = new JSONObject(result);
                     Toast.makeText(getApplicationContext(), obj.getString("message").toString(), Toast.LENGTH_SHORT).show();
                 }catch (Exception e){
-
+                    e.printStackTrace();
                 }
-
-
             }
         }
         SendPostReq spr = new SendPostReq();
