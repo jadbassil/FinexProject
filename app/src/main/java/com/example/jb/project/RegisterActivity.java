@@ -1,13 +1,10 @@
 package com.example.jb.project;
 
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -46,10 +43,10 @@ public class RegisterActivity extends AppCompatActivity {
         } else {
             //SendDataToServer(name, email, password);
 
-            JSONParser j = new JSONParser();
+            Connect j = new Connect();
             JSONObject obj;
             class SendPostReqAsyncTask extends AsyncTask<String, Void, String> {
-                JSONParser j = new JSONParser();
+                Connect j = new Connect();
                 JSONObject obj;
                 String name = regName.getText().toString();
                 String email = regEmail.getText().toString();

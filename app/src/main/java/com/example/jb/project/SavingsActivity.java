@@ -9,22 +9,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.ScrollView;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,7 +27,15 @@ public class SavingsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_savings);
         totalSaving = findViewById(R.id.total_savings);
+        SharedPreferences sharedPref = getSharedPreferences("userInfo", MODE_PRIVATE);
+        totalSaving.setHint(sharedPref.getString("savings",""));
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        SharedPreferences sharedPref = getSharedPreferences("userInfo", MODE_PRIVATE);
+        totalSaving.setHint(sharedPref.getString("savings",""));
     }
 
     @Override
@@ -101,7 +99,7 @@ public class SavingsActivity extends AppCompatActivity {
                 list.add(new BasicNameValuePair("total", String.valueOf(total)));
 
                 try{
-                   JSONParser j = new JSONParser();
+                   Connect j = new Connect();
                    JSONObject obj ;
                    obj = j.makeHttpRequest("http://10.0.2.2/Finex/totalSavings.php", "POST", list);
                    return obj.toString();

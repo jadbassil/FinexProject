@@ -10,13 +10,15 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimary">
+        android:background="@color/colorPrimary"
+        >
 
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginVertical="10dp"
             android:layout_weight="0.5"
+            android:layout_marginHorizontal="5dp"
             android:onClick="openBalanceAct">
 
             <TextView
@@ -58,6 +60,7 @@
             android:layout_height="wrap_content"
             android:layout_marginVertical="10dp"
             android:layout_weight="0.5"
+            android:layout_marginHorizontal="5dp"
             android:onClick="openSavingsAct">
 
             <TextView
@@ -94,7 +97,8 @@
         android:layout_height="70dp"
         android:layout_marginTop="20dp"
         android:background="#ffffff"
-        android:onClick="openMonths">
+        android:onClick="openMonths"
+        android:layout_marginHorizontal="10dp">
 
         <ImageView
             android:id="@+id/img_calendar"
@@ -110,7 +114,6 @@
             android:layout_alignLeft="@id/img_calendar"
             android:layout_alignRight="@id/img_calendar"
             android:gravity="center"
-            android:text="5"
             android:textStyle="bold" />\
 
         <TextView
@@ -122,17 +125,16 @@
             android:layout_marginStart="13dp"
             android:layout_toEndOf="@+id/img_calendar"
             android:layout_toRightOf="@+id/img_calendar"
-            android:text="January 2018"
             android:textColor="#000000"
             android:textSize="18dp"
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/duration"
+            android:id="@+id/range"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/img_calendar"
-            android:text="(from 1/1/2018 to 31/1/2018)" />
+             />
 
         <TextView
             android:layout_width="wrap_content"
@@ -140,7 +142,7 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_below="@+id/month"
-            android:text="29 days left" />
+            android:id="@+id/daysleft" />
 
         <ImageView
             android:layout_width="25dp"
@@ -157,94 +159,75 @@
         android:layout_height="2dp"
         android:background="#eeeeee" />
 
-    <LinearLayout
+    <TableLayout
         android:layout_width="match_parent"
-        android:layout_height="54dp">
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:stretchColumns="1"
+        android:layout_marginBottom="10dp"
+        >
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.33"
-            android:background="#ffffff">
-
-            <TextView
-                android:id="@+id/val_expenses"
+        <TableRow
+            android:layout_weight="1">
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignLeft="@+id/textView3"
-                android:layout_alignParentTop="true"
-                android:layout_alignStart="@+id/textView3"
-                android:text="_"
-                android:textSize="17dp"
-                android:textStyle="bold" />
+                android:orientation="vertical"
+                >
 
-            <TextView
-                android:id="@+id/textView3"
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="_"
+                    android:layout_gravity="center"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Spendings"/>
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_below="@+id/val_expenses"
-                android:layout_marginLeft="28dp"
-                android:layout_marginStart="28dp"
-                android:text="Expenses" />
-        </RelativeLayout>
+                android:orientation="vertical"
+                android:layout_column="1"
+                android:layout_gravity="center_horizontal">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.33"
-            android:background="#ffffff">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="_"/>
 
-            <TextView
-                android:id="@+id/val_saving"
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Savings"/>
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignLeft="@+id/textView"
-                android:layout_alignParentTop="true"
-                android:layout_alignStart="@+id/textView"
-                android:text="_"
-                android:textSize="17dp"
-                android:textStyle="bold" />
+                android:orientation="vertical"
+                android:layout_column="1"
+                android:layout_gravity="center_horizontal">
 
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_below="@+id/val_saving"
-                android:layout_marginLeft="30dp"
-                android:layout_marginStart="30dp"
-                android:text="Saving" />
-        </RelativeLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="_"/>
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.33"
-            android:background="#ffffff">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Residual Income"/>
+            </LinearLayout>
 
-            <TextView
-                android:id="@+id/rest"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:text="_"
-                android:textSize="17dp"
-                android:textStyle="bold" />
+        </TableRow>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_below="@+id/rest"
-                android:text="Residual Income" />
-        </RelativeLayout>
-    </LinearLayout>
+    </TableLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -261,7 +244,8 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp">
 
 
         <TextView
@@ -270,7 +254,8 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:text="Select expense item" />
+            android:text="Select expense item"
+            android:onClick="openExpenses"/>
 
     </RelativeLayout>
 </LinearLayout>

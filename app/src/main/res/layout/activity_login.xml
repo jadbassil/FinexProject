@@ -11,7 +11,7 @@
         android:layout_height="177dp"
         android:layout_gravity="center"
         android:layout_marginTop="50dp"
-        android:src="@drawable/wallet" />
+        android:src="@drawable/wallet1" />
 
     <EditText
         android:layout_width="match_parent"

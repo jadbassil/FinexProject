@@ -28,7 +28,8 @@
         <activity
             android:name=".RegisterActivity"
             android:label="Register"
-            android:noHistory="true" />
+            android:noHistory="true"
+            android:parentActivityName=".LoginActivity"/>
         <activity
             android:name=".SpendingActivity"
             android:label="Spendings" />
@@ -50,6 +51,17 @@
         <activity
             android:name=".SettingsActivity"
             android:label="Settings"/>
+        <activity android:name=".Expenses"
+            android:label="Expenses"/>
+        <activity android:name=".SpendingActivity2"
+            android:label="Finex"/>
+        <activity android:name=".AddingAmount"
+            android:label="Add New Amount"/>
+        <activity android:name=".BalanceActivity"
+            android:label="Balance"/>
+        <activity android:name=".Months"
+            android:label="Months"/>
+
     </application>
 
 </manifest>

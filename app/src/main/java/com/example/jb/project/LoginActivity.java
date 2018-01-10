@@ -11,20 +11,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class LoginActivity extends AppCompatActivity {
@@ -72,12 +63,13 @@ public class LoginActivity extends AppCompatActivity {
                 List<NameValuePair> list = new ArrayList<>();
                 list.add(new BasicNameValuePair("email", email));
                 list.add(new BasicNameValuePair("password", password));
-                JSONParser j = new JSONParser();
+                Connect j = new Connect();
                 JSONObject obj;
                 try {
                     obj = j.makeHttpRequest("http://10.0.2.2/Finex/signIn.php", "POST", list);
                     return obj.toString();
                 }catch (Exception e){
+                    Toast.makeText(getApplicationContext(),"Check your connection",Toast.LENGTH_SHORT);
                     e.printStackTrace();
                 }
                 return null;

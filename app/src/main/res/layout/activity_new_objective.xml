@@ -114,4 +114,23 @@
         android:onClick="addObjective"
         android:background="@color/colorPrimary"/>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="My objectives:"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ListView
+            android:id="@+id/objectives_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"></ListView>
+
+
+    </LinearLayout>
+
 </TableLayout>

@@ -26,14 +26,14 @@ import org.json.JSONObject;
 
 import android.util.Log;
 
-public class JSONParser {
+public class Connect {
 
     static InputStream is = null;
     static JSONObject jObj = null;
     static String json = "";
 
     // constructor
-    public JSONParser() {
+    public Connect() {
 
     }
 

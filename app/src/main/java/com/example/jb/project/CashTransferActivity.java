@@ -2,7 +2,6 @@ package com.example.jb.project;
 
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
-import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -64,7 +63,7 @@ public class CashTransferActivity extends AppCompatActivity {
                 list.add(new BasicNameValuePair("from", transferFrom.getSelectedItem().toString()));
                 list.add(new BasicNameValuePair("to", transferTo.getSelectedItem().toString()));
                 try{
-                    JSONParser j = new JSONParser();
+                    Connect j = new Connect();
                     JSONObject obj;
                     obj = j.makeHttpRequest("http://10.0.2.2/Finex/cashTransfer.php", "POST", list);
                     return obj.toString();
