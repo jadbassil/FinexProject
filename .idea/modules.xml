@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Finex_Project.iml" filepath="$PROJECT_DIR$/Finex_Project.iml" />
+      <module fileurl="file://C:\Users\User\Documents\I3350\Project\Finex_Project.iml" filepath="C:\Users\User\Documents\I3350\Project\Finex_Project.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Project.iml" filepath="$PROJECT_DIR$/Project.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
