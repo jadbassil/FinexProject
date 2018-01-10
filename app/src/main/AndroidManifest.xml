@@ -47,6 +47,19 @@
         <activity
             android:name=".SettingsActivity"
             android:label="Settings"/>
+        <activity
+            android:name=".BalanceActivity"
+            android:label="Balance"/>
+        <activity
+            android:name=".AddingAmount"
+            android:label="Adding new amount"/>
+        <activity
+            android:name=".Months"
+            android:label="Months"/>
+        <activity
+            android:name=".Expenses"
+            android:label="Expenses"/>
+        
     </application>
 
 </manifest>

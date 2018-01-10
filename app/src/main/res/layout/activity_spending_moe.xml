@@ -4,28 +4,30 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="com.example.jb.project.SpendingActivity2">
+    tools:context="com.example.jb.project.SpendingActivity2"
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimary">
+        android:background="@color/colorPrimary"
+        >
 
         <RelativeLayout
+            android:onClick="openBalanceAct"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginVertical="10dp"
             android:layout_weight="0.5"
-            android:onClick="openBalanceAct">
-
+            android:layout_marginVertical="10dp"
+            >
             <TextView
-                android:id="@+id/balance_txtview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignBaseline="@id/balance_btn"
+                android:text="Balance"
                 android:layout_centerVertical="true"
-                android:text="Balance" />
+                android:id="@+id/balance_txtview"
+                android:layout_alignBaseline="@id/balance_btn"
+                />
 
             <Button
                 android:id="@+id/balance_btn"
@@ -35,7 +37,7 @@
                 android:layout_toLeftOf="@+id/imageView"
                 android:layout_toStartOf="@+id/imageView"
                 android:background="@drawable/roundbutton"
-                android:onClick="openBalanceAct" />
+                android:onClick="openBalanceAct"/>
 
             <ImageView
                 android:id="@+id/imageView"
@@ -49,23 +51,24 @@
         </RelativeLayout>
 
         <View
-            android:layout_width="1dp"
             android:layout_height="match_parent"
-            android:background="#eeeeee" />
+            android:layout_width="1dp"
+            android:background="#eeeeee"/>
 
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="0.5"
             android:layout_marginVertical="10dp"
-            android:layout_weight="0.5">
-
+            >
             <TextView
-                android:id="@+id/savings_txtview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignBaseline="@id/savings_btn"
+                android:text="Savings"
                 android:layout_centerVertical="true"
-                android:text="Savings" />
+                android:id="@+id/savings_txtview"
+                android:layout_alignBaseline="@id/savings_btn"
+                />
 
             <Button
                 android:id="@+id/savings_btn"
@@ -89,11 +92,11 @@
     </LinearLayout>
 
     <RelativeLayout
+        android:onClick="openMonths"
+        android:background="#ffffff"
         android:layout_width="match_parent"
         android:layout_height="70dp"
-        android:layout_marginTop="20dp"
-        android:background="#ffffff"
-        android:onClick="openMonths">
+        android:layout_marginTop="20dp">
 
         <ImageView
             android:id="@+id/img_calendar"
@@ -105,15 +108,13 @@
             android:id="@+id/day"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textStyle="bold"
             android:layout_alignBottom="@id/img_calendar"
             android:layout_alignLeft="@id/img_calendar"
-            android:layout_alignRight="@id/img_calendar"
-            android:gravity="center"
-            android:text="5"
-            android:textStyle="bold" />\
+            android:layout_alignRight="@id/img_calendar"/>\
 
         <TextView
-            android:id="@+id/month"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/img_calendar"
@@ -121,25 +122,25 @@
             android:layout_marginStart="13dp"
             android:layout_toEndOf="@+id/img_calendar"
             android:layout_toRightOf="@+id/img_calendar"
-            android:text="January 2018"
-            android:textColor="#000000"
             android:textSize="18dp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:textColor="#000000"
+            android:id="@+id/month" />
 
         <TextView
-            android:id="@+id/duration"
+            android:id="@+id/range"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/img_calendar"
-            android:text="(from 1/1/2018 to 31/1/2018)" />
+            android:layout_below="@id/img_calendar" />
 
         <TextView
+            android:id="@+id/daysleft"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_below="@+id/month"
-            android:text="29 days left" />
+            />
 
         <ImageView
             android:layout_width="25dp"
@@ -147,14 +148,14 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
-            android:src="@drawable/right_icon" />
+            android:src="@drawable/right_icon"/>
 
     </RelativeLayout>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="2dp"
-        android:background="#eeeeee" />
+        android:background="#eeeeee"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -257,11 +258,9 @@
         </ScrollView>
 
     </LinearLayout>
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
 
         <TextView
             android:layout_width="wrap_content"
@@ -269,7 +268,8 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:text="Select expense item" />
+            android:text="Select expense item"
+            android:onClick="openSelection"/>
 
     </RelativeLayout>
 </LinearLayout>
