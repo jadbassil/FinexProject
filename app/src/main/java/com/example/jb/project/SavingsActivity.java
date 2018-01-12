@@ -117,6 +117,10 @@ public class SavingsActivity extends AppCompatActivity {
                 super.onPostExecute(result);
                 try {
                     JSONObject obj = new JSONObject(result);
+                    SharedPreferences sharedPref = getSharedPreferences("userInfo", MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPref.edit();
+                    editor.putString("savings", totalSaving.getText().toString());
+                    editor.apply();
                     Toast.makeText(getApplicationContext(), obj.getString("message").toString(), Toast.LENGTH_SHORT).show();
                 }catch (Exception e){
                     e.printStackTrace();

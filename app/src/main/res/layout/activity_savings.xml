@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="#FFFFFF"
+    android:focusable="true"
     tools:context="com.example.jb.project.SavingsActivity">
 
     <RelativeLayout
@@ -31,7 +32,7 @@
             android:id="@+id/total_savings"
             android:layout_toRightOf="@id/total_savings_text"
             android:inputType="number"
-            android:focusable="false"
+            android:focusedByDefault="false"
             />
 
 

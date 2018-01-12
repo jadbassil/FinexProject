@@ -69,6 +69,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignBaseline="@id/savings_btn"
                 android:layout_centerVertical="true"
+                android:layout_marginStart="10dp"
                 android:text="Savings" />
 
             <Button
