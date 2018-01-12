@@ -67,7 +67,7 @@ public class RegisterActivity extends AppCompatActivity {
                     try {
                         JSONObject obj = new JSONObject(result);
                         if(obj.getBoolean("success")){
-                            Intent intent = new Intent(getApplicationContext(), SpendingActivity.class);
+                            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             startActivity(intent);
                         }else {

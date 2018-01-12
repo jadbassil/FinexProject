@@ -8,7 +8,7 @@
     android:background="#FFFFFF"
     android:focusable="true"
     tools:context="com.example.jb.project.SavingsActivity">
-
+    <!--
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -57,7 +57,7 @@
         android:layout_marginBottom="20dp"
         android:layout_marginTop="10dp"
         android:onClick="setTotalSavings"/>
-
+    -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
