@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.jb.project.SpendingActivity2">
+    tools:context="com.example.jb.project.SpendingActivity">
 
     <LinearLayout
+        android:id="@+id/linear1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
-        >
+        android:background="@color/colorPrimary">
 
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginVertical="10dp"
             android:layout_weight="0.5"
-            android:layout_marginHorizontal="5dp"
+            android:layout_marginHorizontal="10dp"
             android:onClick="openBalanceAct">
 
             <TextView
@@ -53,14 +53,14 @@
         <View
             android:layout_width="1dp"
             android:layout_height="match_parent"
-            android:background="#eeeeee" />
+            android:background="#eeeeee"
+            />
 
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginVertical="10dp"
             android:layout_weight="0.5"
-            android:layout_marginHorizontal="5dp"
             android:onClick="openSavingsAct">
 
             <TextView
@@ -93,12 +93,15 @@
     </LinearLayout>
 
     <RelativeLayout
+        android:id="@+id/relative1"
+        android:layout_below="@+id/linear1"
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:layout_marginTop="20dp"
         android:background="#ffffff"
-        android:onClick="openMonths"
-        android:layout_marginHorizontal="10dp">
+        android:layout_marginHorizontal="10dp"
+
+        android:onClick="openMonths">
 
         <ImageView
             android:id="@+id/img_calendar"
@@ -133,16 +136,15 @@
             android:id="@+id/range"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/img_calendar"
-             />
+            android:layout_below="@id/img_calendar" />
 
         <TextView
+            android:id="@+id/daysleft"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:layout_below="@+id/month"
-            android:id="@+id/daysleft" />
+            android:layout_below="@+id/month" />
 
         <ImageView
             android:layout_width="25dp"
@@ -155,20 +157,20 @@
     </RelativeLayout>
 
     <View
+        android:id="@+id/space"
+        android:layout_below="@id/relative1"
         android:layout_width="match_parent"
-        android:layout_height="2dp"
+        android:layout_height="4dp"
         android:background="#eeeeee" />
 
     <TableLayout
+        android:layout_below="@id/space"
+        android:id="@+id/linear2"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="10dp"
-        android:stretchColumns="1"
-        android:layout_marginBottom="10dp"
-        >
-
-        <TableRow
-            android:layout_weight="1">
+        android:layout_height="54dp"
+        android:stretchColumns="*"
+        android:layout_marginHorizontal="10dp">
+        <TableRow>
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -184,6 +186,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:text="Spendings"/>
             </LinearLayout>
 
@@ -191,7 +194,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:layout_column="1"
                 android:layout_gravity="center_horizontal">
 
                 <TextView
@@ -203,6 +205,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:text="Savings"/>
             </LinearLayout>
 
@@ -210,7 +213,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:layout_column="1"
                 android:layout_gravity="center_horizontal">
 
                 <TextView
@@ -224,38 +226,41 @@
                     android:layout_height="wrap_content"
                     android:text="Residual Income"/>
             </LinearLayout>
-
         </TableRow>
-
     </TableLayout>
 
-    <LinearLayout
+    <View
+        android:id="@+id/space1"
+        android:layout_below="@id/linear2"
         android:layout_width="match_parent"
-        android:layout_height="272dp"
+        android:layout_height="15dp"
+        android:background="#eeeeee" />
+
+    <LinearLayout
+        android:layout_below="@+id/space1"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
         android:layout_marginTop="20dp">
 
-        <ScrollView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-        </ScrollView>
+        <ListView
+            android:id="@+id/expensesList"
+            android:layout_width="match_parent"
+            android:layout_height="249dp" />
 
     </LinearLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="10dp">
-
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:text="Select expense item"
-            android:onClick="openExpenses"/>
+            android:layout_alignParentBottom="true"
+            android:onClick="openExpenses"
+            android:text="Select expense item" />
 
     </RelativeLayout>
-</LinearLayout>
+</RelativeLayout>
