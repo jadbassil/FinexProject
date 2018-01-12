@@ -29,6 +29,8 @@ public class SavingsActivity extends AppCompatActivity {
         totalSaving = findViewById(R.id.total_savings);
         SharedPreferences sharedPref = getSharedPreferences("userInfo", MODE_PRIVATE);
         totalSaving.setHint(sharedPref.getString("savings",""));
+
+
     }
 
     @Override

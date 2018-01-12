@@ -3,6 +3,7 @@ package com.example.jb.project;
 import android.app.Activity;
 import android.app.ListActivity;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -35,6 +36,8 @@ public class NewObjectiveActivity extends Activity {
     EditText finalAmount, name;
     ListView list;
     JSONObject obj;
+    CustomObjectivesAdapter adapter;
+    public  ArrayList<ObjectivesListModel> CustomListViewValuesArr = new ArrayList<ObjectivesListModel>();
 
 
     private String[] l;
@@ -82,7 +85,12 @@ public class NewObjectiveActivity extends Activity {
         });
 
         obj = getUserObjectives();
-        setList();
+        try {
+            if(obj.getInt("numberRows") != 0)
+                setList();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 
     }
 
@@ -97,17 +105,24 @@ public class NewObjectiveActivity extends Activity {
 
     public void setList(){
         obj = getUserObjectives();
+        System.out.println(obj.length());
+
         try {
             JSONArray objectives = obj.optJSONArray("objectives");
             l = new String[objectives.length()];
             for (int i = 0; i < objectives.length(); i++) {
+                final ObjectivesListModel l = new ObjectivesListModel();
                 JSONObject o = objectives.getJSONObject(i);
-                String name =   o.optString("name");
-                l[i] = o.optString("name");
+                l.setName(o.getString("name"));
+                l.setAmount(o.optString("amount"));
+                l.setEndDate(o.optString("date_end"));
+                CustomListViewValuesArr.add(l);
             }
             System.out.println(l);
-            ArrayAdapter<String> mArrayAdapter = new ArrayAdapter<String>(NewObjectiveActivity.this, android.R.layout.simple_list_item_1, l);
-            list.setAdapter(mArrayAdapter);
+            Resources res =getResources();
+            adapter = new CustomObjectivesAdapter(this, CustomListViewValuesArr, res);
+            //ArrayAdapter<String> mArrayAdapter = new ArrayAdapter<String>(NewObjectiveActivity.this, android.R.layout.simple_list_item_1, l);
+            list.setAdapter(adapter);
 
         }catch (Exception e){
             e.printStackTrace();
@@ -119,7 +134,7 @@ public class NewObjectiveActivity extends Activity {
             Toast.makeText(this, "Please choose a name for your objective", Toast.LENGTH_SHORT).show();
             return;
         }
-        if(finalAmount.getText().toString()==""){
+        if(finalAmount.getText().toString().equals("")){
             Toast.makeText(this, "Please input your final amount", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -128,7 +143,7 @@ public class NewObjectiveActivity extends Activity {
             return;
         }
         sendDataToServer();
-        setList();
+        this.recreate();
     }
 
     public void sendDataToServer(){
@@ -177,7 +192,7 @@ public class NewObjectiveActivity extends Activity {
     }
 
     public JSONObject getUserObjectives(){
-        JSONObject obj = new JSONObject();
+        JSONObject obj;
         class SendToServer extends AsyncTask<String, Void, String>{
             JSONObject obj;
 
@@ -196,7 +211,6 @@ public class NewObjectiveActivity extends Activity {
                 try {
                     obj = new JSONObject(result);
                     obj = new JSONObject(result);
-
                 }catch (Exception e){
                     e.printStackTrace();
                 }
