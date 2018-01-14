@@ -1,20 +1,17 @@
 package com.example.jb.project;
 
-import android.app.ActionBar;
+
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.os.AsyncTask;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,7 +35,6 @@ public class CustomObjectivesAdapter extends BaseAdapter  {
     public Resources res;
     ObjectivesListModel tempValues=null;
     int i=0;
-
 
     public CustomObjectivesAdapter(Activity a, ArrayList d,Resources resLocal){
         activity = a;
@@ -67,7 +63,10 @@ public class CustomObjectivesAdapter extends BaseAdapter  {
         public TextView nameTextView;
         public TextView amountTextView;
         public TextView endDateTextView;
+        public TextView percentTextView;
+        public TextView currentAmountTextView;
         public ImageView delete;
+        public ProgressBar progressBar;
 
     }
 
@@ -86,6 +85,12 @@ public class CustomObjectivesAdapter extends BaseAdapter  {
             holder.amountTextView = vi.findViewById(R.id.objective_amount_list);
             holder.endDateTextView = vi.findViewById(R.id.objective_endDate_list);
             holder.delete = vi.findViewById(R.id.delete_objective);
+            holder.percentTextView = vi.findViewById(R.id.objective_percent);
+            holder.progressBar = vi.findViewById(R.id.objective_progress_bar);
+            holder.currentAmountTextView = vi.findViewById(R.id.current_amount);
+
+
+
 
             vi.setTag( holder );
 
@@ -123,6 +128,11 @@ public class CustomObjectivesAdapter extends BaseAdapter  {
             holder.nameTextView.setText( tempValues.getName() );
             holder.amountTextView.setText( tempValues.getAmount() );
             holder.endDateTextView.setText(tempValues.getEndDate());
+            holder.progressBar.setMax(Integer.valueOf(holder.amountTextView.getText().toString()));
+            SharedPreferences sharedPreferences = activity.getSharedPreferences("userInfo",MODE_PRIVATE);
+            holder.progressBar.setProgress(Integer.valueOf(sharedPreferences.getString("savings","")));
+            holder.percentTextView.setText(String.valueOf((holder.progressBar.getProgress()*100)/Integer.valueOf(holder.amountTextView.getText().toString())) + "%");
+            holder.currentAmountTextView.setText(sharedPreferences.getString("savings" ,""));
 
         }
         return vi;

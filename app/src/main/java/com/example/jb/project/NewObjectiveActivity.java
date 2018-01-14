@@ -1,33 +1,24 @@
 package com.example.jb.project;
 
 import android.app.Activity;
-import android.app.ListActivity;
+import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.Resources;
 import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
-import org.json.JSONArray;
 import org.json.JSONObject;
-import org.json.simple.parser.JSONParser;
-
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 public class NewObjectiveActivity extends Activity {
 
@@ -35,12 +26,6 @@ public class NewObjectiveActivity extends Activity {
     TextView nbMonths;
     EditText finalAmount, name;
     ListView list;
-    JSONObject obj;
-    CustomObjectivesAdapter adapter;
-    public  ArrayList<ObjectivesListModel> CustomListViewValuesArr = new ArrayList<ObjectivesListModel>();
-
-
-    private String[] l;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -84,16 +69,7 @@ public class NewObjectiveActivity extends Activity {
             }
         });
 
-        obj = getUserObjectives();
-        try {
-            if(obj.getInt("numberRows") != 0)
-                setList();
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-
     }
-
 
     public void plusClicked(View v){
         sb.setProgress(sb.getProgress()+1);
@@ -103,30 +79,12 @@ public class NewObjectiveActivity extends Activity {
         sb.setProgress(sb.getProgress()-1);
     }
 
-    public void setList(){
-        obj = getUserObjectives();
-        System.out.println(obj.length());
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent i = new Intent(NewObjectiveActivity.this, SavingsActivity.class);
+        startActivity(i);
 
-        try {
-            JSONArray objectives = obj.optJSONArray("objectives");
-            l = new String[objectives.length()];
-            for (int i = 0; i < objectives.length(); i++) {
-                final ObjectivesListModel l = new ObjectivesListModel();
-                JSONObject o = objectives.getJSONObject(i);
-                l.setName(o.getString("name"));
-                l.setAmount(o.optString("amount"));
-                l.setEndDate(o.optString("date_end"));
-                CustomListViewValuesArr.add(l);
-            }
-            System.out.println(l);
-            Resources res =getResources();
-            adapter = new CustomObjectivesAdapter(this, CustomListViewValuesArr, res);
-            //ArrayAdapter<String> mArrayAdapter = new ArrayAdapter<String>(NewObjectiveActivity.this, android.R.layout.simple_list_item_1, l);
-            list.setAdapter(adapter);
-
-        }catch (Exception e){
-            e.printStackTrace();
-        }
     }
 
     public void addObjective(View v){
@@ -143,7 +101,8 @@ public class NewObjectiveActivity extends Activity {
             return;
         }
         sendDataToServer();
-        this.recreate();
+        Intent i = new Intent(NewObjectiveActivity.this, SavingsActivity.class);
+        startActivity(i);
     }
 
     public void sendDataToServer(){
@@ -191,41 +150,6 @@ public class NewObjectiveActivity extends Activity {
         sd.execute();
     }
 
-    public JSONObject getUserObjectives(){
-        JSONObject obj;
-        class SendToServer extends AsyncTask<String, Void, String>{
-            JSONObject obj;
 
-            @Override
-            public String doInBackground(String... params){
-                SharedPreferences sharedPref = getSharedPreferences("userInfo", MODE_PRIVATE);
-                int id = sharedPref.getInt("user_id", 0);
-                List<NameValuePair> list = new ArrayList<>();
-                list.add(new BasicNameValuePair("id",String.valueOf(id)));
-                Connect j = new Connect();
-                JSONObject o = j.makeHttpRequest("http://10.0.2.2/Finex/getObjectives.php", "POST", list);
-                return o.toString();
-            }
-            @Override
-            public void onPostExecute(String result){
-                try {
-                    obj = new JSONObject(result);
-                    obj = new JSONObject(result);
-                }catch (Exception e){
-                    e.printStackTrace();
-                }
-            }
-        }
-        SendToServer s = new SendToServer();
-        try {
-            s.execute();
-            String result= s.get();
-            obj = new JSONObject(result);
-            return obj;
-        } catch (Exception e){
-            e.printStackTrace();
-        }
-        return null;
-    }
 
 }

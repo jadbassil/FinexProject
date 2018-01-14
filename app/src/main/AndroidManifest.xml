@@ -55,13 +55,15 @@
             android:label="Finex" />
         <activity
             android:name=".AddingAmount"
-            android:label="Add New Amount" />
+            android:label="Add New Amount"
+            android:parentActivityName=".SavingsActivity"/>
         <activity
             android:name=".BalanceActivity"
             android:label="Balance" />
         <activity
             android:name=".Months"
-            android:label="Months" />
+            android:label="Months"
+            android:parentActivityName=".SpendingActivity"/>
         <activity android:name=".Splash"
             android:noHistory="true">
             android:theme="@android:style/SplashTheme>

@@ -67,6 +67,7 @@ public class RegisterActivity extends AppCompatActivity {
                     try {
                         JSONObject obj = new JSONObject(result);
                         if(obj.getBoolean("success")){
+                            Toast.makeText(getApplicationContext(), "Registered successfully", Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             startActivity(intent);

@@ -1,7 +1,10 @@
 package com.example.jb.project;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -11,6 +14,11 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.TextView;
 
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 import java.util.Calendar;
 
 public class SpendingActivity extends AppCompatActivity {
@@ -20,22 +28,43 @@ public class SpendingActivity extends AppCompatActivity {
     TextView month;
     TextView range;
     TextView daysleft;
+    TextView spendingMonth;
+    TextView residualMonth;
     String mois;
+    Calendar c = Calendar.getInstance();
     int totaldays;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_spending);
+        spendingMonth = findViewById(R.id.spending_month);
+        residualMonth = findViewById(R.id.residual_month);
         balance = findViewById(R.id.balance_btn);
         savings = findViewById(R.id.savings_btn);
         SharedPreferences sharedPref = getSharedPreferences("userInfo", MODE_PRIVATE);
         balance.setText(sharedPref.getString("balance", "_"));
         savings.setText(sharedPref.getString("savings", "_"));
+
+        if(balance.getText().toString().equals("0") && savings.getText().toString().equals("0")){
+            new AlertDialog.Builder(this)
+                    .setTitle("Alert")
+                    .setMessage("Your balance and savings accounts are empty please visit your profile to initialize your accounts")
+                    .setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Intent i = new Intent(SpendingActivity.this, SettingsActivity.class);
+                            startActivity(i);
+                        }
+                    })
+                    .setNegativeButton("later", null)
+                    .show();
+        }
+
+
         day = findViewById(R.id.day);
         month=findViewById(R.id.month);
         range=findViewById(R.id.range);
         daysleft=findViewById(R.id.daysleft);
-        Calendar c = Calendar.getInstance();
         int dayOfMonth = c.get(Calendar.DAY_OF_MONTH);
         int yr=c.get(Calendar.YEAR);
         int m=c.get(Calendar.MONTH);
@@ -109,6 +138,8 @@ public class SpendingActivity extends AppCompatActivity {
         totaldays=c.getActualMaximum(Calendar.DAY_OF_MONTH);
         int day_int=Integer.parseInt(day.getText().toString());
         daysleft.setText(totaldays-day_int+" days left");
+        getMonthlyData();
+
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
@@ -164,6 +195,50 @@ public class SpendingActivity extends AppCompatActivity {
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
+        }
+    }
+
+    public void getMonthlyData(){
+        getData g = new getData();
+        g.execute();
+    }
+
+    class getData extends AsyncTask<String, Void, String>{
+        @Override
+        protected String doInBackground(String... params){
+            SharedPreferences sharedPref = getSharedPreferences("userInfo",MODE_PRIVATE);
+            int id = sharedPref.getInt("user_id",0);
+
+            ArrayList<NameValuePair> list = new ArrayList<>();
+            list.add(new BasicNameValuePair("id",String.valueOf(id)));
+            list.add(new BasicNameValuePair("month", String.valueOf(c.get(Calendar.MONTH)+1)));
+            System.out.println(list);
+
+            try{
+                Connect c = new Connect();
+                JSONObject obj;
+                obj = c.makeHttpRequest("http://10.0.2.2/Finex/getMonthlyData.php", "POST", list);
+                System.out.println(obj);
+                return obj.toString();
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        public void onPostExecute(String result){
+            try{
+                JSONObject obj = new JSONObject(result);
+                spendingMonth.setText(obj.getString("spendings"));
+                residualMonth.setText(obj.getString("residualIncome"));
+
+                if(spendingMonth.getText().toString().equals("null"))
+                    spendingMonth.setText("_");
+
+            }catch (Exception e){
+                e.printStackTrace();
+            }
         }
     }
 }
