@@ -79,13 +79,12 @@ public class NewObjectiveActivity extends Activity {
         sb.setProgress(sb.getProgress()-1);
     }
 
-    @Override
+    /*@Override
     public void onBackPressed() {
         super.onBackPressed();
         Intent i = new Intent(NewObjectiveActivity.this, SavingsActivity.class);
         startActivity(i);
-
-    }
+    }*/
 
     public void addObjective(View v){
         if(name.getText().toString().equals("")){

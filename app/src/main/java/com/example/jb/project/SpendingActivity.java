@@ -1,5 +1,6 @@
 package com.example.jb.project;
 
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -33,6 +34,9 @@ public class SpendingActivity extends AppCompatActivity {
     String mois;
     Calendar c = Calendar.getInstance();
     int totaldays;
+    int dayOfMonth = c.get(Calendar.DAY_OF_MONTH);
+    int yr=c.get(Calendar.YEAR);
+    int m=c.get(Calendar.MONTH);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,10 +69,18 @@ public class SpendingActivity extends AppCompatActivity {
         month=findViewById(R.id.month);
         range=findViewById(R.id.range);
         daysleft=findViewById(R.id.daysleft);
-        int dayOfMonth = c.get(Calendar.DAY_OF_MONTH);
-        int yr=c.get(Calendar.YEAR);
-        int m=c.get(Calendar.MONTH);
+        totaldays=c.getActualMaximum(Calendar.DAY_OF_MONTH);
         day.setText(""+dayOfMonth);
+        int day_int=Integer.parseInt(day.getText().toString());
+        daysleft.setText(totaldays-day_int+" days left");
+
+        Bundle chosenMonth = this.getIntent().getExtras();
+        if(chosenMonth!=null) {
+            System.out.println("test" + chosenMonth.getInt("month"));
+            m=chosenMonth.getInt("month");
+            yr=chosenMonth.getInt("year");
+            daysleft.setText("");
+        }
         switch(m){
             case 0:{
                 mois="January";
@@ -135,12 +147,11 @@ public class SpendingActivity extends AppCompatActivity {
             }
         }
         month.setText(mois+" "+yr);
-        totaldays=c.getActualMaximum(Calendar.DAY_OF_MONTH);
-        int day_int=Integer.parseInt(day.getText().toString());
-        daysleft.setText(totaldays-day_int+" days left");
-        getMonthlyData();
 
+        getMonthlyData();
     }
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
         getMenuInflater().inflate(R.menu.main, menu);
@@ -174,6 +185,7 @@ public class SpendingActivity extends AppCompatActivity {
     }
 
     public void openMonths(View v){
+        this.finish();
         Intent intent = new Intent(SpendingActivity.this,Months.class);
         startActivity(intent);
     }
@@ -211,7 +223,7 @@ public class SpendingActivity extends AppCompatActivity {
 
             ArrayList<NameValuePair> list = new ArrayList<>();
             list.add(new BasicNameValuePair("id",String.valueOf(id)));
-            list.add(new BasicNameValuePair("month", String.valueOf(c.get(Calendar.MONTH)+1)));
+            list.add(new BasicNameValuePair("month", String.valueOf(m+1)));
             System.out.println(list);
 
             try{

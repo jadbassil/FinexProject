@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
     tools:context="com.example.jb.project.Months">
 
     <LinearLayout
@@ -17,6 +18,12 @@
             android:gravity="center"
             android:text="Select the month you want to display its details"/>
     </LinearLayout>
+
+    <ListView
+        android:id="@+id/months_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
 
 
 </LinearLayout>
