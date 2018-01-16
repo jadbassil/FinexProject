@@ -39,7 +39,7 @@
         <activity
             android:name=".SavingAmountActivity"
             android:label="Add Saving Amount"
-            android:parentActivityName=".SavingsActivity" />
+            />
         <activity
             android:name=".NewObjectiveActivity"
             android:label="Add New Objective"
@@ -55,8 +55,7 @@
             android:label="Finex" />
         <activity
             android:name=".AddingAmount"
-            android:label="Add New Amount"
-            android:parentActivityName=".SavingsActivity"/>
+            android:label="Add New Amount"/>
         <activity
             android:name=".BalanceActivity"
             android:label="Balance" />

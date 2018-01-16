@@ -47,8 +47,8 @@ public class SavingsActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        setResult(RESULT_CANCELED);
-        finish();
+        Intent i = new Intent(SavingsActivity.this, SpendingActivity.class);
+        startActivity(i);
     }
 
     @Override

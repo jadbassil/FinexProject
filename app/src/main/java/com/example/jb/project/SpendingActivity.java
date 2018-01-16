@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import org.apache.http.NameValuePair;
@@ -64,7 +65,6 @@ public class SpendingActivity extends AppCompatActivity {
                     .show();
         }
 
-
         day = findViewById(R.id.day);
         month=findViewById(R.id.month);
         range=findViewById(R.id.range);
@@ -76,9 +76,9 @@ public class SpendingActivity extends AppCompatActivity {
 
         Bundle chosenMonth = this.getIntent().getExtras();
         if(chosenMonth!=null) {
-            System.out.println("test" + chosenMonth.getInt("month"));
-            m=chosenMonth.getInt("month");
-            yr=chosenMonth.getInt("year");
+            mois=chosenMonth.getString("month");
+            m=getIntFromMonth(mois);
+            yr=Integer.valueOf(chosenMonth.getString("year"));
             daysleft.setText("");
         }
         switch(m){
@@ -147,7 +147,6 @@ public class SpendingActivity extends AppCompatActivity {
             }
         }
         month.setText(mois+" "+yr);
-
         getMonthlyData();
     }
 
@@ -180,6 +179,7 @@ public class SpendingActivity extends AppCompatActivity {
     }
 
     public void openSavingsAct(View v){
+        this.finish();
         Intent intent = new Intent(SpendingActivity.this,SavingsActivity.class);
         startActivity(intent);
     }
@@ -252,5 +252,23 @@ public class SpendingActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
+    }
+
+    public int getIntFromMonth(String month){
+        switch (month){
+            case "January": return 0;
+            case "February": return 1;
+            case "March": return 2;
+            case "April": return 3;
+            case "May": return 4;
+            case "June": return 5;
+            case "July": return 6;
+            case "August": return 7;
+            case "September": return 8;
+            case "October": return 9;
+            case "November": return 10;
+            case "December": return 11;
+        }
+        return -1;
     }
 }

@@ -81,13 +81,19 @@ public class Months extends AppCompatActivity {
                 }
 
                 int i=0;
-                String[] months = new String[currentDate.getMonth()-regDate.getMonth()+1];
-                System.out.println(regDate.getMonth());
+                final String[] months, monthYear;
+                if(regDate.getYear()<currentDate.getYear()){
+                    int yearInterval = currentDate.getYear()-regDate.getYear();
+                    months = new String[(currentDate.getMonth()+yearInterval*12)-regDate.getMonth()+1];
+
+                }else {
+                    months = new String[currentDate.getMonth() - regDate.getMonth() + 1];
+                }
+                System.out.println(regDate.compareTo(currentDate) <= 0);
                 while (regDate.compareTo(currentDate) <= 0) {
                     months[i] = new String(monthToString(regDate.getMonth()) + " " + (regDate.getYear()-100+2000));
                     regDate.setMonth(regDate.getMonth()+1);
                     //months.add(monthToString(regDate.getMonth()) +" "+ (regDate.getYear()-100));
-
                     i++;
                 }
                 ArrayAdapter<String> adapter = new ArrayAdapter<>(getApplicationContext(), R.layout.months_list_layout, months);
@@ -96,9 +102,12 @@ public class Months extends AppCompatActivity {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         Intent i = new Intent(getApplicationContext(), SpendingActivity.class);
-                        System.out.println(regDate.getYear()-100+2000);
-                        i.putExtra("month",position);
-                        i.putExtra("year", regDate.getYear()-100+2000);
+                        System.out.println(regDate.getMonth());
+                        String[] monthYear = new String[2];
+                        monthYear = monthAndYear(months[position]);
+                        System.out.println(monthYear[0]);
+                        i.putExtra("month", monthYear[0]);
+                        i.putExtra("year", monthYear[1]);
                         startActivity(i);
                     }
                 });
@@ -160,6 +169,12 @@ public class Months extends AppCompatActivity {
             }
         }
         return mois;
+    }
+
+    public String[] monthAndYear(String s){
+        String[] monthYear = new String[2];
+        monthYear = s.split(" ");
+        return monthYear;
     }
 
 }
